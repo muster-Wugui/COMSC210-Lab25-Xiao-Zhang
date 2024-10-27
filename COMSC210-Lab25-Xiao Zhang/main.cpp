@@ -29,7 +29,10 @@ int main() {
     cout<<"Operation\t"<<"Vector\t"<<"List\t"<<"Set"<<endl;
     string name = "codes.txt";
     
-    
+    read(name);
+    sorting();
+    insert();
+    del();
     
 
     return 0;
@@ -144,5 +147,5 @@ void del(){
     auto end_se = high_resolution_clock::now();
     auto duration_se = duration_cast<milliseconds>(end_se - start_se);
     
-    cout<<"Erase\t"<<duration_ve<<"\t"<<duration_li<<"\t"<<duration_se<<endl;
+    cout<<"Delete\t"<<duration_ve<<"\t"<<duration_li<<"\t"<<duration_se<<endl;
 }
