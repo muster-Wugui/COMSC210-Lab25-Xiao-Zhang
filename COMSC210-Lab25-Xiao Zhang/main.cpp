@@ -11,6 +11,7 @@
 #include <list>
 #include <set>
 #include <vector>
+#include <algorithm>
 using namespace std;
 using namespace std::chrono;
 
@@ -34,118 +35,101 @@ int main() {
     insert();
     del();
     
-
     return 0;
 }
 
-void read(string name){
-    ifstream file(name);
+void read(string name) {
     string temp;
+    ifstream file(name);
     auto start_ve = high_resolution_clock::now();
-
     while(file >> temp){
         ve.push_back(temp);
     }
-
     auto end_ve = high_resolution_clock::now();
     auto duration_ve = duration_cast<milliseconds>(end_ve - start_ve);
+    file.close();
     
+    file.open(name);
     auto start_li = high_resolution_clock::now();
-
     while(file >> temp){
         li.push_back(temp);
     }
-
     auto end_li = high_resolution_clock::now();
     auto duration_li = duration_cast<milliseconds>(end_li - start_li);
+    file.close();
     
+    file.open(name);
     auto start_se = high_resolution_clock::now();
-
     while(file >> temp){
         se.insert(temp);
     }
-
     auto end_se = high_resolution_clock::now();
     auto duration_se = duration_cast<milliseconds>(end_se - start_se);
+    file.close();
     
-    cout<<"Read\t"<<duration_ve<<"\t"<<duration_li<<"\t"<<duration_se<<endl;
+    cout << "Read\t" << duration_ve.count() << "\t" << duration_li.count() << "\t" << duration_se.count() << endl;
 }
 
-void sorting(){
+void sorting() {
     auto start_ve = high_resolution_clock::now();
-
-    sort(ve.begin(),ve.end());
-
+    sort(ve.begin(), ve.end());
     auto end_ve = high_resolution_clock::now();
     auto duration_ve = duration_cast<milliseconds>(end_ve - start_ve);
     
     auto start_li = high_resolution_clock::now();
-
-    sort(li.begin(),li.end());
-
+    li.sort();
     auto end_li = high_resolution_clock::now();
     auto duration_li = duration_cast<milliseconds>(end_li - start_li);
     
     int duration_se = -1;
     
-    cout<<"Sort\t"<<duration_ve<<"\t"<<duration_li<<"\t"<<duration_se<<endl;
+    cout << "Sort\t" << duration_ve.count() << "\t" << duration_li.count() << "\t" << duration_se << endl;
 }
 
-void insert(){
+void insert() {
     string code = "TESTCODE";
+    
     auto start_ve = high_resolution_clock::now();
-
-    long middle = ve.size()/2;
-    ve.insert(ve.begin()+middle, code);
-
+    long middle = ve.size() / 2;
+    ve.insert(ve.begin() + middle, code);
     auto end_ve = high_resolution_clock::now();
     auto duration_ve = duration_cast<milliseconds>(end_ve - start_ve);
     
     auto start_li = high_resolution_clock::now();
-
     auto it = li.begin();
-    advance(it, li.size()/2);
-    li.insert(it,code);
-
+    advance(it, li.size() / 2);
+    li.insert(it, code);
     auto end_li = high_resolution_clock::now();
     auto duration_li = duration_cast<milliseconds>(end_li - start_li);
     
     auto start_se = high_resolution_clock::now();
-
     se.insert(code);
-
     auto end_se = high_resolution_clock::now();
     auto duration_se = duration_cast<milliseconds>(end_se - start_se);
     
-    cout<<"Insert\t"<<duration_ve<<"\t"<<duration_li<<"\t"<<duration_se<<endl;
+    cout << "Insert\t" << duration_ve.count() << "\t" << duration_li.count() << "\t" << duration_se.count() << endl;
 }
 
-void del(){
+void del() {
     auto start_ve = high_resolution_clock::now();
-
-    long middle = ve.size()/2;
-    ve.erase(ve.begin()+middle);
-
+    long middle = ve.size() / 2;
+    ve.erase(ve.begin() + middle);
     auto end_ve = high_resolution_clock::now();
     auto duration_ve = duration_cast<milliseconds>(end_ve - start_ve);
     
     auto start_li = high_resolution_clock::now();
-
     auto it = li.begin();
-    advance(it, li.size()/2);
+    advance(it, li.size() / 2);
     li.erase(it);
-
     auto end_li = high_resolution_clock::now();
     auto duration_li = duration_cast<milliseconds>(end_li - start_li);
     
     auto start_se = high_resolution_clock::now();
-
     auto it_se = se.begin();
-    advance(it_se, se.size()/2);
+    advance(it_se, se.size() / 2);
     se.erase(it_se);
-
     auto end_se = high_resolution_clock::now();
     auto duration_se = duration_cast<milliseconds>(end_se - start_se);
     
-    cout<<"Delete\t"<<duration_ve<<"\t"<<duration_li<<"\t"<<duration_se<<endl;
+    cout << "Delete\t" << duration_ve.count() << "\t" << duration_li.count() << "\t" << duration_se.count() << endl;
 }
