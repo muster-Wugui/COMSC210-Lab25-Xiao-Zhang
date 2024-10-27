@@ -6,9 +6,37 @@
 //
 
 #include <iostream>
+#include <chrono>
+#include <fstream>
+#include <list>
+#include <set>
+#include <vector>
+using namespace std;
+using namespace std::chrono;
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+const int MAX_SZ = 20000;
+
+vector<string> ve;
+list<string> li;
+set<string> se;
+
+int main() {
+    ifstream file("codes.txt");
+    
+    
+    string temp;
+    auto start = high_resolution_clock::now();
+
+    while(file >> temp){
+        ve.push_back(temp);
+    }
+
+    auto end = high_resolution_clock::now();
+    auto duration_ve = duration_cast<milliseconds>(end - start);
+    
+    
+    
+
     return 0;
 }
+
