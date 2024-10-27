@@ -23,6 +23,7 @@ set<string> se;
 void read(string name);
 void sorting();
 void insert();
+void del();
 
 int main() {
     cout<<"Operation\t"<<"Vector\t"<<"List\t"<<"Set"<<endl;
@@ -91,7 +92,7 @@ void insert(){
     string code = "TESTCODE";
     auto start_ve = high_resolution_clock::now();
 
-    int middle = ve.size()/2;
+    long middle = ve.size()/2;
     ve.insert(ve.begin()+middle, code);
 
     auto end_ve = high_resolution_clock::now();
@@ -99,19 +100,49 @@ void insert(){
     
     auto start_li = high_resolution_clock::now();
 
-   
+    auto it = li.begin();
+    advance(it, li.size()/2);
+    li.insert(it,code);
 
     auto end_li = high_resolution_clock::now();
     auto duration_li = duration_cast<milliseconds>(end_li - start_li);
     
     auto start_se = high_resolution_clock::now();
 
-    while(file >> temp){
-        se.insert(temp);
-    }
+    se.insert(code);
 
     auto end_se = high_resolution_clock::now();
     auto duration_se = duration_cast<milliseconds>(end_se - start_se);
     
-    cout<<"Read\t"<<duration_ve<<"\t"<<duration_li<<"\t"<<duration_se<<endl;
+    cout<<"Insert\t"<<duration_ve<<"\t"<<duration_li<<"\t"<<duration_se<<endl;
+}
+
+void del(){
+    auto start_ve = high_resolution_clock::now();
+
+    long middle = ve.size()/2;
+    ve.erase(ve.begin()+middle);
+
+    auto end_ve = high_resolution_clock::now();
+    auto duration_ve = duration_cast<milliseconds>(end_ve - start_ve);
+    
+    auto start_li = high_resolution_clock::now();
+
+    auto it = li.begin();
+    advance(it, li.size()/2);
+    li.erase(it);
+
+    auto end_li = high_resolution_clock::now();
+    auto duration_li = duration_cast<milliseconds>(end_li - start_li);
+    
+    auto start_se = high_resolution_clock::now();
+
+    auto it_se = se.begin();
+    advance(it_se, se.size()/2);
+    se.erase(it_se);
+
+    auto end_se = high_resolution_clock::now();
+    auto duration_se = duration_cast<milliseconds>(end_se - start_se);
+    
+    cout<<"Erase\t"<<duration_ve<<"\t"<<duration_li<<"\t"<<duration_se<<endl;
 }
